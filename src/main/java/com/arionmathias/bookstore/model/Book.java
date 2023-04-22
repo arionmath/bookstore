@@ -20,7 +20,7 @@ import lombok.ToString;
 @Entity
 public class Book implements Serializable {
 
-	private static final long serialVersionUID = -6754064675814204416L;
+	private static final long serialVersionUID = -732051171124891557L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
