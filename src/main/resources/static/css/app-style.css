@@ -1,0 +1,12 @@
+.menubar-item{
+	font-size: 1.5em;
+}
+
+.paginator-list{
+	display: flex;
+	list-style: none;
+	padding: 0px;
+}
+.w-20pc{
+	width: 20%;
+}

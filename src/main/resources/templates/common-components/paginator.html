@@ -1,0 +1,36 @@
+<div th:fragment="pages(pageable)" class="mx-auto px-auto text-center">
+
+	<div class="container row mx-auto px-auto">
+		<nav class=" row mx-auto px-auto" th:with="urlBuilder=${T(org.springframework.web.servlet.support.ServletUriComponentsBuilder).fromCurrentRequest()}">
+
+			<ul class="paginator-list" th:with="arraynum=${ {-3,-2,-1,0, 1, 2, 3} }">
+
+				<li class="page-item">
+					<a th:class="${pageable.number==0? 'page-link bg-info text-white' :'page-link'}"
+						th:href="${urlBuilder.replaceQueryParam('page', '').toUriString()}">1</a>
+				</li>
+
+				<li th:each="it:${arraynum}" th:value="${it}" class="page-item"
+					th:if="${pageable.number+it>0&&pageable.number+it<pageable.totalPages}">
+						<a th:class=" ${it==0}? 'page-link bg-info text-white' : 'page-link' " 
+						th:href="${urlBuilder.replaceQueryParam('page', pageable.number+it).toUriString()}"
+						th:text="${pageable.number+it+1}">
+						</a>
+				</li>
+
+				<li class="page-item" th:if="${pageable.number<pageable.totalPages-4}"><a
+					class="page-link"
+					th:href="${urlBuilder.replaceQueryParam('page', pageable.totalPages-1).toUriString()}"
+					th:text="${pageable.totalPages}"></a>
+				</li>
+
+			</ul>
+		</nav>
+	</div>
+	<div class="container">
+		<span class="">
+			<span th:text="${pageable.totalElements}"></span> elements has been found 
+			with <span th:text="${pageable.totalPages}"></span> pages.
+		</span>
+	</div>
+</div>
