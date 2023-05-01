@@ -20,6 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.arionmathias.bookstore.model.Book;
 import com.arionmathias.bookstore.service.BookService;
 
+import jakarta.validation.Valid;
+
 
 @Controller
 @RequestMapping({"/book","/"})
@@ -48,7 +50,7 @@ public class BookController {
 	}
 
 	@PostMapping("/create")
-	public ModelAndView createBook(Book book, BindingResult bindingResult,
+	public ModelAndView createBook(@Valid Book book, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
 		ModelAndView mav = null;
 		if (bindingResult.hasErrors()) {
