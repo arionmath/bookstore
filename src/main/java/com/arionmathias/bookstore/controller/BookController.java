@@ -22,7 +22,7 @@ import com.arionmathias.bookstore.service.BookService;
 
 
 @Controller
-@RequestMapping("/book")
+@RequestMapping({"/book","/"})
 public class BookController {
 	
 	@Autowired
@@ -31,8 +31,9 @@ public class BookController {
 	@GetMapping
 	public ModelAndView viewListing(@PageableDefault(direction = Direction.ASC, size = 5, sort = "title") Pageable pagination,
 			@RequestParam Map<String, String> filters) {
-		
-		ModelAndView mav = new ModelAndView("/book/index.html");
+		// Note that view name does not start with '/', if it  does so the ViewResolver will not found
+		// the file when package project into a jar
+		ModelAndView mav = new ModelAndView("book/index.html");
 		Page<Book> bookPage = bookService.findByPageFiltered(pagination, filters);
 		mav.addObject("bookPage", bookPage);
 		
@@ -41,7 +42,7 @@ public class BookController {
 
 	@GetMapping("/create")
 	public ModelAndView viewCreateBook(Book book) {
-		ModelAndView mav = new ModelAndView("/book/create.html");
+		ModelAndView mav = new ModelAndView("book/create.html");
 		mav.addObject("book",book);
 		return mav;
 	}
