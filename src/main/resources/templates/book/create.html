@@ -5,29 +5,9 @@
 				<h2>New Book</h2>
 			</div>
 			<form th:action="@{/book/create}" method="post">
-				<div class="card-body">
-					<!-- form here -->
-					<div class="row">
-						<div class="form-group col-md-6">
-							<label for="title">Title</label> <input class="form-control" maxlength="50" id="title"
-								name="title" th:value="${book?.title}">
-						</div>
-
-						<div class="form-group col-md-6">
-							<label for="totalPages">Total of pages</label> <input class="form-control" id="totalPages"
-								type="number" min="0" name="totalPages" th:value="${book?.totalPages}">
-						</div>
-
-					</div>
-
-					<div class="row">
-						<div class="form-group col-12">
-							<label for="description">Description</label> <input class="form-control" id="description"
-								maxlength="1000" name="description" th:value="${book?.description}">
-						</div>
-					</div>
-					<!-- end form -->
-				</div>
+				
+				<div th:replace="~{book/form :: form-fields(${book})}"></div>
+				
 				<div class="card-footer">
 					<button type="submit" class="btn btn-primary">Save</button>
 					<a th:href="@{/book}" class="btn btn-info">Back</a>

@@ -1,0 +1,21 @@
+<div class="card-body" th:fragment="form-fields(book)">
+	<div class="row">
+		<div class="form-group col-md-6">
+			<label for="title">Title</label> <input class="form-control" maxlength="50" id="title"
+				name="title" th:value="${book?.title}">
+		</div>
+
+		<div class="form-group col-md-6">
+			<label for="totalPages">Total of pages</label> <input class="form-control" id="totalPages"
+				type="number" min="0" name="totalPages" th:value="${book?.totalPages}">
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="form-group col-12">
+			<label for="description">Description</label> <input class="form-control" id="description"
+				maxlength="1000" name="description" th:value="${book?.description}">
+		</div>
+	</div>
+</div>
