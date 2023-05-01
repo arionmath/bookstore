@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="pt-br" th:fragment="layout (conteudo)">
+
+<head>
+	<meta charset="utf-8">
+	<title>Bookstore</title>
+
+	<!-- CSS -->
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+	<link rel="stylesheet"
+		th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
+	<link rel="stylesheet" th:href="@{/css/dashboard.css}">
+	<link rel="stylesheet" th:href="@{/css/app-style.css}">
+
+
+	<!-- Javascript/JQuery -->
+	<script type="text/javascript" th:src="@{/javascript/jquery-3.6.0.min.js}"></script>
+	<script type="text/javascript" th:src="@{/javascript/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/javascript/app.js}"></script>
+</head>
+
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div th:replace="~{common-components/custom-header::custom-header}"></div>
+			<div th:replace="~{common-components/menuBar::menuBar}"></div>
+		
+		
+			<main role="main" class="col-md-11 ml-sm-auto pt-1 px-4 mb-5">
+		
+				<div th:if="${successMessage != null}" class="alert alert-success alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<span th:text="${successMessage}"></span>
+				</div>
+				<div th:if="${failureMessage != null}" class="alert alert-danger alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+					<span th:if="${failureMessage instanceof T(java.lang.String)}" th:text="${failureMessage}"></span>
+		
+					<ul th:unless="${failureMessage instanceof T(java.lang.String)}">
+						<li th:each="msg:${failureMessage}" th:text="${msg}">
+					</ul>
+				</div>
+		
+				<!--book-->
+				<div class="card mb-2">
+					<div class="card-header">
+						<h2>Book Info</h2>
+					</div>
+						<div class="card-body">
+								<div class="row my-3">
+									<div class="col-md-2">
+										<span>Title</span> 
+									</div>
+									<div class="col-md-10">
+										<span th:text="${book.title}"></span>
+									</div>
+									
+								</div>
+								
+								<div class="row my-3">
+									<div class="col-md-2">
+										<span>Total of pages</span>
+									</div>
+									
+									<div class="col-md-10">
+										<span th:text="${book.totalPages}"></span>
+									</div>									
+								</div>
+								
+								
+								<div class="row my-3">
+									<div class="col-md-2">
+										<span>Description</span>
+									</div>
+									
+									<div class="col-md-10">
+										<span th:text="${book.description}"></span>
+									</div>											
+								</div>
+						</div>
+						<div class="card-footer">
+							<a th:href="@{/book}" class="btn btn-info">Back</a>
+						</div>
+				</div>
+				<!--end book-->
+			</main>
+			<div class=" py-5 "></div>
+			<div th:replace="~{common-components/custom-footer::custom-footer}"></div>
+		</div>
+	</div>
+</body>
+
+</html>

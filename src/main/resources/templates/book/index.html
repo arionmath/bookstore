@@ -85,7 +85,7 @@
 						<th>ID</th>
 						<th>Title</th>
 						<th>Description</th>
-						<th>Total Pages</th>
+						<th class="text-center">Total Pages</th>
 						<th class="w-20pc text-right"> Actions</th>
 					</tr>
 				</thead>
@@ -93,11 +93,11 @@
 					<tr th:each="book:${bookPage.getContent()}">
 						<td th:text="${book.id}"></td>
 						<td th:text="${book.title}"></td>
-						<td th:text="${book.description}"></td>
-						<td th:text="${book.totalPages}"></td>
+						<td th:text="${book.descriptionBriefly}"></td>
+						<td class="text-center" th:text="${book.totalPages}"></td>
 
 						<td class="text-right"><a
-							th:href="@{/book/view/{id} (id=${book.id})}"
+							th:href="@{/book/details/{id} (id=${book.id})}"
 							class="btn btn-info" title="view"> <i class="fa fa-eye"></i>
 						</a> <a th:href="@{/book/update/{id} (id=${book.id})}"
 							class="btn btn-primary" title="update"> <i

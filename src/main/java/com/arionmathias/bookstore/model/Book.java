@@ -37,6 +37,17 @@ public class Book implements Serializable {
 	@NotNull(message = "Amount pages is a required.")
 	private Integer totalPages;
 
+	public String getDescriptionBriefly(){
+		if(this.description==null) {
+			return "";
+		}
+		if(this.description.length()<=100) {
+			return this.description;
+		}else {
+			return this.description.substring(0, 99)+"...";
+		}
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

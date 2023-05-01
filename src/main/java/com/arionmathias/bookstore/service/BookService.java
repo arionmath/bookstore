@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.arionmathias.bookstore.dao.BookDAO;
+import com.arionmathias.bookstore.exception.ResourceNotFoundException;
 import com.arionmathias.bookstore.model.Book;
 
 @Service
@@ -23,6 +24,12 @@ public class BookService {
 
 	public Book create(Book book) {
 		return bookDAO.createOne(book);
+	}
+
+	public Book findById(Long id) {
+		Book book  = this.bookDAO.findById(id)
+				.orElseThrow(()->new ResourceNotFoundException("book", id+""));
+		return book;
 	}
 	
 	

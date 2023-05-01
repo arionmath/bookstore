@@ -11,16 +11,19 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.arionmathias.bookstore.exception.ResourceNotFoundException;
 import com.arionmathias.bookstore.model.Book;
 import com.arionmathias.bookstore.service.BookService;
 
 import jakarta.validation.Valid;
+import jakarta.websocket.server.PathParam;
 
 
 @Controller
@@ -67,6 +70,19 @@ public class BookController {
 		}
 		
 		return mav;
+	}
+	
+	@GetMapping("/details/{id}")
+	public ModelAndView viewInfoBook(@PathVariable Long id,RedirectAttributes redirectAttributes) {
+		ModelAndView mav = new ModelAndView("book/information.html");
+		try {
+			Book book = this.bookService.findById(id);
+			mav.addObject("book", book);
+			return mav;
+		}catch (ResourceNotFoundException e) {
+			redirectAttributes.addFlashAttribute("failureMessage", e.getMessage());
+			return new ModelAndView("redirect:/book");
+		}
 	}
 
 }

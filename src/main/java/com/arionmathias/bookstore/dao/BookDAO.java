@@ -1,6 +1,7 @@
 package com.arionmathias.bookstore.dao;
 
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -50,6 +51,10 @@ public class BookDAO {
 	@Transactional
 	public Book createOne(Book book) {
 		return this.bookRepo.save(book);
+	}
+
+	public Optional<Book> findById(Long id) {
+		return this.bookRepo.findById(id);
 	}
 
 }
