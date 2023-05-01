@@ -1,46 +1,5 @@
-<!doctype html>
-<html lang="pt-br" th:fragment="layout (conteudo)">
-
-<head>
-	<meta charset="utf-8">
-	<title>Bookstore</title>
-
-	<!-- CSS -->
-	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-	<link rel="stylesheet"
-		th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css}">
-	<link rel="stylesheet" th:href="@{/css/dashboard.css}">
-	<link rel="stylesheet" th:href="@{/css/app-style.css}">
-
-
-	<!-- Javascript/JQuery -->
-	<script type="text/javascript" th:src="@{/javascript/jquery-3.6.0.min.js}"></script>
-	<script type="text/javascript" th:src="@{/javascript/bootstrap.min.js}"></script>
-	<script type="text/javascript" th:src="@{/javascript/app.js}"></script>
-</head>
-
-<body>
-	<div class="container-fluid">
-		<div class="row">
-			<div th:replace="~{common-components/custom-header::custom-header}"></div>
-			<div th:replace="~{common-components/menuBar::menuBar}"></div>
-		
-		
-			<main role="main" class="col-md-11 ml-sm-auto pt-1 px-4 mb-5">
-		
-				<div th:if="${successMessage != null}" class="alert alert-success alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<span th:text="${successMessage}"></span>
-				</div>
-				<div th:if="${failureMessage != null}" class="alert alert-danger alert-dismissible" role="alert">
-					<button type="button" class="close" data-dismiss="alert">&times;</button>
-					<span th:if="${failureMessage instanceof T(java.lang.String)}" th:text="${failureMessage}"></span>
-		
-					<ul th:unless="${failureMessage instanceof T(java.lang.String)}">
-						<li th:each="msg:${failureMessage}" th:text="${msg}">
-					</ul>
-				</div>
-		
+<div th:replace="~{main-template :: layout ( ~{:: #content})}">
+	<div id="content">
 		<div class="card mb-2">
 			<div class="card-header">
 				<h2>Manage Books</h2>
@@ -50,13 +9,13 @@
 					<div class="row">
 
 						<div class="form-group col-md-6">
-							<label class="mb-0" for="search">Find for</label> <input type="text"
-								name="search" id="search" class="form-control">
+							<label class="mb-0" for="search">Find for</label> <input type="text" name="search"
+								id="search" class="form-control">
 						</div>
 
 						<div class="form-group col-md-4">
-							<label class="mb-0" for="totalPages">Total Pages</label> <input type="number"
-								min="0" name="totalPages" id="totalPages" class="form-control">
+							<label class="mb-0" for="totalPages">Total Pages</label> <input type="number" min="0"
+								name="totalPages" id="totalPages" class="form-control">
 						</div>
 
 						<div class="form-group col-md-2 pt-3">
@@ -71,8 +30,7 @@
 			</div>
 			<div class="card-footer">
 				<div class="text-right mb-2">
-					<a th:href="@{/book/create}" class="btn btn-primary"><i
-						class="fa fa-plus mr-2"></i>Create</a>
+					<a th:href="@{/book/create}" class="btn btn-primary"><i class="fa fa-plus mr-2"></i>Create</a>
 				</div>
 			</div>
 		</div>
@@ -96,26 +54,20 @@
 						<td th:text="${book.descriptionBriefly}"></td>
 						<td class="text-center" th:text="${book.totalPages}"></td>
 
-						<td class="text-right"><a
-							th:href="@{/book/details/{id} (id=${book.id})}"
-							class="btn btn-info" title="view"> <i class="fa fa-eye"></i>
-						</a> <a th:href="@{/book/update/{id} (id=${book.id})}"
-							class="btn btn-primary" title="update"> <i
-								class="fa fa-pencil"></i>
-						</a> <a
-							th:href="@{/book/delete/{id} (id=${book.id})}"
-							class="btn btn-danger" title="Deletar"> <i
-								class="fa fa-trash"></i>
-						</a></td>
+						<td class="text-right"><a th:href="@{/book/details/{id} (id=${book.id})}" class="btn btn-info"
+								title="view"> <i class="fa fa-eye"></i>
+							</a> <a th:href="@{/book/update/{id} (id=${book.id})}" class="btn btn-primary"
+								title="update">
+								<i class="fa fa-pencil"></i>
+							</a> <a th:href="@{/book/delete/{id} (id=${book.id})}" class="btn btn-danger"
+								title="Deletar">
+								<i class="fa fa-trash"></i>
+							</a></td>
 					</tr>
 				</tbody>
 			</table>
 		</section>
-		<div
-			th:replace="~{common-components/paginator.html::pages(${bookPage})}"></div>
-			
-			<div class=" py-5 "></div>
-			<div th:replace="~{common-components/custom-footer::custom-footer}"></div>			
+		<div th:replace="~{common-components/paginator.html::pages(${bookPage})}">
+		</div>
 	</div>
-</body>
-</html>
+</div>
