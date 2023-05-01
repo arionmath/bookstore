@@ -8,7 +8,7 @@ The first step is make an CRUD operations for books and authors.
 
 ## Running this project
 
-You will need, for now, just Java 17. The database used is H2 and doest need to be installed.
+You will need, for now, just Java 17. The database used is H2 and doesn't need to be installed.
 Follow those steps to run the Bookstore project
 
 - Clone this repo 
